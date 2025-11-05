@@ -3,7 +3,7 @@ import { Hono } from "hono";
 
 const INSTANCE_COUNT = 3;
 
-export class MiniRuntimeContainer extends Container {
+export class MiniRuntimeContainerNginx extends Container {
   // Port the container listens on (default: 8080)
   defaultPort = 8080;
   // Time before container sleeps due to inactivity (default: 30s)
@@ -11,7 +11,7 @@ export class MiniRuntimeContainer extends Container {
   
   // Environment variables passed to the container
   envVars = {
-    AKTO_LOG_LEVEL: "DEBUG",
+    AKTO_LOG_LEVEL: "INFO",
     DATABASE_ABSTRACTOR_SERVICE_TOKEN: "<TOKEN>",
     DATABASE_ABSTRACTOR_SERVICE_URL: "https://cyborg.akto.io",
     AKTO_TRAFFIC_QUEUE_THRESHOLD: "100",
@@ -40,8 +40,8 @@ export class MiniRuntimeContainer extends Container {
 
 // Create Hono app with proper typing for Cloudflare Workers
 type Environment = {
-  readonly MINI_RUNTIME_CONTAINER: DurableObjectNamespace<MiniRuntimeContainer>
-  readonly AKTO_TRAFFIC_QUEUE: Queue<any>
+  readonly MINI_RUNTIME_CONTAINER_NGINX: DurableObjectNamespace<MiniRuntimeContainerNginx>
+  readonly AKTO_TRAFFIC_QUEUE_NGINX: Queue<any>
 }
 const app = new Hono<{
   Bindings: Environment;
@@ -101,9 +101,9 @@ export default {
       const normalized = normalizeBatchData({ batchData: payload })
       const result = JSON.stringify(normalized)
 
-      const containerInstance = getRandom(env.MINI_RUNTIME_CONTAINER, INSTANCE_COUNT)
-      const containerId = env.MINI_RUNTIME_CONTAINER.idFromName(`/container/${containerInstance}`)
-      const container = env.MINI_RUNTIME_CONTAINER.get(containerId)
+      const containerInstance = getRandom(env.MINI_RUNTIME_CONTAINER_NGINX, INSTANCE_COUNT)
+      const containerId = env.MINI_RUNTIME_CONTAINER_NGINX.idFromName(`/container/${containerInstance}`)
+      const container = env.MINI_RUNTIME_CONTAINER_NGINX.get(containerId)
 
       const req = new Request("http://internal/upload", {
         method: "POST",
@@ -126,14 +126,14 @@ export default {
 
           // 🔒 requeue each message one by one before next batch
           for (const m of batchSlice) {
-            await env.AKTO_TRAFFIC_QUEUE.send(m.body)
+            await env.AKTO_TRAFFIC_QUEUE_NGINX.send(m.body)
           }
         }
       } catch (err) {
         console.error("Error sending messages to container:", err)
 
         for (const m of batchSlice) {
-          await env.AKTO_TRAFFIC_QUEUE.send(m.body)
+          await env.AKTO_TRAFFIC_QUEUE_NGINX.send(m.body)
         }
       }
     }

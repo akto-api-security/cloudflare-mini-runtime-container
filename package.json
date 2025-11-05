@@ -1,5 +1,5 @@
 {
-  "name": "cloudflare-mini-runtime-container",
+  "name": "cloudflare-mini-runtime-container-nginx",
   "description": "Build a Container-enabled Worker",
   "version": "1.0.0",
   "private": true,

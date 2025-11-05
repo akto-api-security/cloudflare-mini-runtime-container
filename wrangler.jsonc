@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "mini-runtime-worker",
+	"name": "mini-runtime-worker-nginx",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-05-23",
 	"compatibility_flags": [
@@ -15,25 +15,25 @@
 	},
 	"containers": [
 		{
-			"class_name": "MiniRuntimeContainer",
-			"image": "YOUR_PUSHED_IMAGE_URL_HERE",
-			"max_instances": 6,
+			"class_name": "MiniRuntimeContainerNginx",
+			"image": "registry.cloudflare.com/53a10bdb35f546522193c9670ad3e7e5/mr:nayan",
+			"max_instances": 3,
             "instance_type": "standard",
-			"name": "mini-runtime-containers"
+			"name": "mini-runtime-containers-nginx"
 		}
 	],
 	"durable_objects": {
 		"bindings": [
 			{
-				"class_name": "MiniRuntimeContainer",
-				"name": "MINI_RUNTIME_CONTAINER"
+				"class_name": "MiniRuntimeContainerNginx",
+				"name": "MINI_RUNTIME_CONTAINER_NGINX"
 			}
 		]
 	},
 	"queues": {
 		"consumers": [
 		{
-			"queue": "akto-traffic-queue",
+			"queue": "akto-traffic-queue-nginx",
 			"max_batch_size": 5,
 			"max_batch_timeout": 30,
 			"max_retries": 3,
@@ -43,7 +43,7 @@
 	"migrations": [
 		{
 			"new_sqlite_classes": [
-				"MiniRuntimeContainer"
+				"MiniRuntimeContainerNginx"
 			],
 			"tag": "v1"
 		}

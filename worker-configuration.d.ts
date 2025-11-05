@@ -4,10 +4,10 @@
 declare namespace Cloudflare {
 	interface GlobalProps {
 		mainModule: typeof import("./src/index");
-		durableNamespaces: "MiniRuntimeContainer";
+		durableNamespaces: "MiniRuntimeContainerNginx";
 	}
 	interface Env {
-		MINI_RUNTIME_CONTAINER: DurableObjectNamespace<import("./src/index").MiniRuntimeContainer>;
+		MINI_RUNTIME_CONTAINER_NGINX: DurableObjectNamespace<import("./src/index").MiniRuntimeContainerNginx>;
 	}
 }
 interface Env extends Cloudflare.Env {}
