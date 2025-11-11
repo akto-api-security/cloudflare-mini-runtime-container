@@ -4,6 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
+	"account_id": "53a10bdb35f546522193c9670ad3e7e5",
 	"name": "mini-runtime-worker",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-05-23",
@@ -16,8 +17,8 @@
 	"containers": [
 		{
 			"class_name": "MiniRuntimeContainer",
-			"image": "YOUR_PUSHED_IMAGE_URL_HERE",
-			"max_instances": 6,
+			"image": "registry.cloudflare.com/53a10bdb35f546522193c9670ad3e7e5/mr:nayan",
+			"max_instances": 2,
             "instance_type": "standard",
 			"name": "mini-runtime-containers"
 		}
@@ -34,6 +35,12 @@
 		"consumers": [
 		{
 			"queue": "akto-traffic-queue",
+			"max_batch_size": 5,
+			"max_batch_timeout": 30,
+			"max_retries": 3,
+		},
+		{
+			"queue": "akto-traffic-queue-dev",
 			"max_batch_size": 5,
 			"max_batch_timeout": 30,
 			"max_retries": 3,

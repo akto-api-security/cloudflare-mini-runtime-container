@@ -12,7 +12,7 @@ export class MiniRuntimeContainer extends Container {
   // Environment variables passed to the container
   envVars = {
     AKTO_LOG_LEVEL: "DEBUG",
-    DATABASE_ABSTRACTOR_SERVICE_TOKEN: "<TOKEN>",
+    DATABASE_ABSTRACTOR_SERVICE_TOKEN: "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJBa3RvIiwic3ViIjoiaW52aXRlX3VzZXIiLCJhY2NvdW50SWQiOjE3MDAwODc5NjQsImlhdCI6MTc2MTYyNjYyMSwiZXhwIjoxNzc3MzUxNDIxfQ.Gjq7tCwHmfrUBEQMn5WBd9WQY2ey7m8UFbJlOh249xMp3ILsS3uzA5IAjcG_5RpTNBWcXa_6AURm4LlAzCm63DyxyJzh2ZacWTGvyzGL59hOIrPouxoliWbtErmhOlBQon-oZsY1ZhMmESlXyRI6aaT2MVZazXyr39mqvaV41TkY0YeJRl7Tf3UkNKkKHEUT2WH7a2-MtTvHQAX-OlugRcL2YpKaLqjTvsluJcuAAOFncEuOY5db88z--w9M_vkMMKhMuvRbnndn87yiy1NjmeOpn32GbOdJhSMQrSbVmslXykdB5OyxVKh2Mw9IKXjMXaD7oE2mRLrdUSwEFR4yhA",
     DATABASE_ABSTRACTOR_SERVICE_URL: "https://cyborg.akto.io",
     AKTO_TRAFFIC_QUEUE_THRESHOLD: "100",
     AKTO_INACTIVE_QUEUE_PROCESSING_TIME: "5000",
@@ -91,6 +91,39 @@ export default {
 
   async queue(batch: MessageBatch<any>, env: Environment) {
     const messages = batch.messages
+
+    // Check if this is the dev queue
+    if (batch.queue === "akto-traffic-queue-dev") {
+      console.log("=== akto-traffic-queue-dev received ===")
+      console.log("Number of messages:", messages.length)
+
+      messages.forEach((msg, idx) => {
+        console.log(`\n=== Traffic Record ${idx + 1} ===`)
+
+        try {
+          // msg.body is { body: "..." } from producer
+          let data = msg.body
+
+          // Extract the stringified traffic data
+          if (data && typeof data === "object" && "body" in data && typeof data.body === "string") {
+            data = JSON.parse(data.body)
+          } else if (typeof data === "string") {
+            data = JSON.parse(data)
+          }
+
+          console.log(JSON.stringify(data, null, 2))
+        } catch (e) {
+          console.log("Raw body:", JSON.stringify(msg.body))
+          console.log("Parse error:", e)
+        }
+      })
+
+      // Acknowledge all messages
+      for (const m of messages) {
+        m.ack()
+      }
+      return
+    }
 
     // process in fixed-size slices sequentially
     for (let i = 0; i < messages.length; i += 5) {
