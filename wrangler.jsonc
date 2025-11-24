@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "mini-runtime-worker-ch-robinson",
+	"name": "mini-runtime-worker-evenup",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-05-23",
 	"compatibility_flags": [
@@ -15,25 +15,25 @@
 	},
 	"containers": [
 		{
-			"class_name": "MiniRuntimeContainerChRobinson",
+			"class_name": "MiniRuntimeContainerEvenup",
 			"image": "registry.cloudflare.com/53a10bdb35f546522193c9670ad3e7e5/mr:nayan",
 			"max_instances": 3,
             "instance_type": "standard",
-			"name": "mini-runtime-containers-ch-robinson"
+			"name": "mini-runtime-containers-evenup"
 		}
 	],
 	"durable_objects": {
 		"bindings": [
 			{
-				"class_name": "MiniRuntimeContainerChRobinson",
-				"name": "MINI_RUNTIME_CONTAINER_CH_ROBINSON"
+				"class_name": "MiniRuntimeContainerEvenup",
+				"name": "MINI_RUNTIME_CONTAINER_EVENUP"
 			}
 		]
 	},
 	"queues": {
 		"consumers": [
 		{
-			"queue": "akto-traffic-queue-ch-robinson",
+			"queue": "akto-traffic-queue-evenup",
 			"max_batch_size": 5,
 			"max_batch_timeout": 30,
 			"max_retries": 3,
@@ -43,7 +43,7 @@
 	"migrations": [
 		{
 			"new_sqlite_classes": [
-				"MiniRuntimeContainerChRobinson"
+				"MiniRuntimeContainerEvenup"
 			],
 			"tag": "v1"
 		}
