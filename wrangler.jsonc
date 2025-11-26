@@ -17,7 +17,7 @@
 		{
 			"class_name": "MiniRuntimeContainer",
 			"image": "YOUR_PUSHED_IMAGE_URL_HERE",
-			"max_instances": 6,
+			"max_instances": 2,
             "instance_type": "standard",
 			"name": "mini-runtime-containers"
 		}

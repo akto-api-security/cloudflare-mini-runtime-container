@@ -1,6 +1,6 @@
 {
-  "name": "cloudflare-mini-runtime-container",
-  "description": "Build a Container-enabled Worker",
+  "name": "akto-traffic-ingestion-consumer",
+  "description": "Akto mini runtime consumer for traffic ingestion",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -10,16 +10,16 @@
     "cf-typegen": "wrangler types"
   },
   "devDependencies": {
-    "@types/node": "^24.0.13",
-    "typescript": "5.8.3",
-    "wrangler": "^4.24.3"
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.51.0"
   },
   "dependencies": {
-    "@cloudflare/containers": "^0.0.19",
-    "hono": "4.8.2"
+    "@cloudflare/containers": "^0.0.30",
+    "hono": "^4.10.7"
   },
   "cloudflare": {
-    "label": "Containers Starter",
+    "label": "Akto traffic ingestion consumer",
     "products": [
       "Workers",
       "Durable Objects",
