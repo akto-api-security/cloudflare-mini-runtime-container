@@ -11,7 +11,7 @@ export class MiniRuntimeContainer extends Container {
   
   // Environment variables passed to the container
   envVars = {
-    AKTO_LOG_LEVEL: "DEBUG",
+    AKTO_LOG_LEVEL: "INFO",
     DATABASE_ABSTRACTOR_SERVICE_TOKEN: "<TOKEN>",
     DATABASE_ABSTRACTOR_SERVICE_URL: "https://cyborg.akto.io",
     AKTO_TRAFFIC_QUEUE_THRESHOLD: "100",
