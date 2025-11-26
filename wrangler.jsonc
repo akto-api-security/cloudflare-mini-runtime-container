@@ -16,7 +16,7 @@
 	"containers": [
 		{
 			"class_name": "MiniRuntimeContainer",
-			"image": "YOUR_PUSHED_IMAGE_URL_HERE",
+			"image": "registry.cloudflare.com/53a10bdb35f546522193c9670ad3e7e5/mr:nayan",
 			"max_instances": 2,
             "instance_type": "standard",
 			"name": "mini-runtime-containers"
