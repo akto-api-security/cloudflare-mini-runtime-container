@@ -1,7 +1,7 @@
 import { Container, getRandom } from "@cloudflare/containers";
 import { Hono } from "hono";
 
-const INSTANCE_COUNT = 3;
+const INSTANCE_COUNT = 2;
 
 export class MiniRuntimeContainerNginx extends Container {
   // Port the container listens on (default: 8080)
