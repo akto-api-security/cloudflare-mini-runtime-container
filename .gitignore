@@ -11,3 +11,4 @@ build/
 *.tsbuildinfo
 coverage/
 .cache/
+worker-configuration.d.ts
