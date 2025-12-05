@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "mini-runtime-worker-razorpay",
+	"name": "mini-runtime-worker-motley-fool",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-05-23",
 	"compatibility_flags": [
@@ -15,25 +15,25 @@
 	},
 	"containers": [
 		{
-			"class_name": "MiniRuntimeContainerRazorpay",
+			"class_name": "MiniRuntimeContainerMotleyFool",
 			"image": "registry.cloudflare.com/53a10bdb35f546522193c9670ad3e7e5/mr:nayan",
 			"max_instances": 2,
             "instance_type": "standard",
-			"name": "mini-runtime-containers-razorpay"
+			"name": "mini-runtime-containers-motley-fool"
 		}
 	],
 	"durable_objects": {
 		"bindings": [
 			{
-				"class_name": "MiniRuntimeContainerRazorpay",
-				"name": "MINI_RUNTIME_CONTAINER_RAZORPAY"
+				"class_name": "MiniRuntimeContainerMotleyFool",
+				"name": "MINI_RUNTIME_CONTAINER_MOTLEY_FOOL"
 			}
 		]
 	},
 	"queues": {
 		"consumers": [
 		{
-			"queue": "akto-traffic-queue-razorpay",
+			"queue": "akto-traffic-queue-motley-fool",
 			"max_batch_size": 5,
 			"max_batch_timeout": 30,
 			"max_retries": 3,
@@ -43,7 +43,7 @@
 	"migrations": [
 		{
 			"new_sqlite_classes": [
-				"MiniRuntimeContainerRazorpay"
+				"MiniRuntimeContainerMotleyFool"
 			],
 			"tag": "v1"
 		}
