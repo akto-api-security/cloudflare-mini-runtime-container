@@ -12,7 +12,7 @@ export class MiniRuntimeContainerIronheartDemo extends Container {
   // Environment variables passed to the container
   envVars = {
     AKTO_LOG_LEVEL: "INFO",
-    DATABASE_ABSTRACTOR_SERVICE_TOKEN: "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJBa3RvIiwic3ViIjoiaW52aXRlX3VzZXIiLCJhY2NvdW50SWQiOjE2NjkzMjI1MjQsImlhdCI6MTc2Nzc2ODgzMCwiZXhwIjoxNzgzNDA3MjMwfQ.YoOuRZ-f1rpEIcC9LmzRoLnNu37y3EtOy_tyBj8w1PpiZuw_RQ9OUob7nJP1vlU_HkQh9VlIMmu1pBVb1sKat3LPxUyr952i_HDaH1w7t7LHlobHda7vW9QZwnad7ag5GuNXrVH4J9G9e6st3Fu4kyGltczqGhH_BX4WepRhT1h5-4fFFIFCjIkhdhWnhS3MMCqS75Zf8xjHLsekNeZ-xgMDR6oaGhYU1F-_JEEwqc44Re0oY5FPUhswN2o2CwJ10JN32Ry0Z_SAJyu0L8-s_Q6b2DL8mjVacfdJ7IL56T9QWa8mthpfuSfXHzAFE8mkcnllae7RPO7OahOzTeLmwQ",
+    DATABASE_ABSTRACTOR_SERVICE_TOKEN: "<TOKEN>",
     DATABASE_ABSTRACTOR_SERVICE_URL: "https://cyborg.akto.io",
     AKTO_TRAFFIC_QUEUE_THRESHOLD: "100",
     AKTO_INACTIVE_QUEUE_PROCESSING_TIME: "5000",
