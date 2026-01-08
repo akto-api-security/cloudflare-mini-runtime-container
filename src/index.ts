@@ -40,8 +40,8 @@ export class MiniRuntimeContainerMorganStanley extends Container {
 
 // Create Hono app with proper typing for Cloudflare Workers
 type Environment = {
-  readonly MINI_RUNTIME_CONTAINER_IRONHEART_DEMO: DurableObjectNamespace<MiniRuntimeContainerIronheartDemo>
-  readonly AKTO_TRAFFIC_QUEUE_IRONHEART_DEMO: Queue<any>
+  readonly MINI_RUNTIME_CONTAINER_MORGAN_STANLEY: DurableObjectNamespace<MiniRuntimeContainerMorganStanley>
+  readonly AKTO_TRAFFIC_QUEUE_MORGAN_STANLEY: Queue<any>
 }
 const app = new Hono<{
   Bindings: Environment;
