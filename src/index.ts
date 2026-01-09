@@ -3,7 +3,7 @@ import { Hono } from "hono";
 
 const INSTANCE_COUNT = 2;
 
-export class MiniRuntimeContainerIronheartDemo extends Container {
+export class MiniRuntimeContainerMorganStanley extends Container {
   // Port the container listens on (default: 8080)
   defaultPort = 8080;
   // Time before container sleeps due to inactivity (default: 30s)
@@ -40,8 +40,8 @@ export class MiniRuntimeContainerIronheartDemo extends Container {
 
 // Create Hono app with proper typing for Cloudflare Workers
 type Environment = {
-  readonly MINI_RUNTIME_CONTAINER_IRONHEART_DEMO: DurableObjectNamespace<MiniRuntimeContainerIronheartDemo>
-  readonly AKTO_TRAFFIC_QUEUE_IRONHEART_DEMO: Queue<any>
+  readonly MINI_RUNTIME_CONTAINER_DELL_DEMO: DurableObjectNamespace<MiniRuntimeContainerDellDemo>
+  readonly AKTO_TRAFFIC_QUEUE_DELL_DEMO: Queue<any>
 }
 const app = new Hono<{
   Bindings: Environment;
@@ -101,9 +101,9 @@ export default {
       const normalized = normalizeBatchData({ batchData: payload })
       const result = JSON.stringify(normalized)
 
-      const containerInstance = getRandom(env.MINI_RUNTIME_CONTAINER_IRONHEART_DEMO, INSTANCE_COUNT)
-      const containerId = env.MINI_RUNTIME_CONTAINER_IRONHEART_DEMO.idFromName(`/container/${containerInstance}`)
-      const container = env.MINI_RUNTIME_CONTAINER_IRONHEART_DEMO.get(containerId)
+      const containerInstance = getRandom(env.MINI_RUNTIME_CONTAINER_DELL_DEMO, INSTANCE_COUNT)
+      const containerId = env.MINI_RUNTIME_CONTAINER_DELL_DEMO.idFromName(`/container/${containerInstance}`)
+      const container = env.MINI_RUNTIME_CONTAINER_DELL_DEMO.get(containerId)
 
       const req = new Request("http://internal/upload", {
         method: "POST",
@@ -126,14 +126,14 @@ export default {
 
           // 🔒 requeue each message one by one before next batch
           for (const m of batchSlice) {
-            await env.AKTO_TRAFFIC_QUEUE_IRONHEART_DEMO.send(m.body)
+            await env.AKTO_TRAFFIC_QUEUE_DELL_DEMO.send(m.body)
           }
         }
       } catch (err) {
         console.error("Error sending messages to container:", err)
 
         for (const m of batchSlice) {
-          await env.AKTO_TRAFFIC_QUEUE_IRONHEART_DEMO.send(m.body)
+          await env.AKTO_TRAFFIC_QUEUE_DELL_DEMO.send(m.body)
         }
       }
     }

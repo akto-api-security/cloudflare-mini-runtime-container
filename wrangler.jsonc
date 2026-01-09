@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "mini-runtime-worker-ironheart-demo",
+	"name": "mini-runtime-worker-dell-demo",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-05-23",
 	"compatibility_flags": [
@@ -15,25 +15,25 @@
 	},
 	"containers": [
 		{
-			"class_name": "MiniRuntimeContainerIronheartDemo",
+			"class_name": "MiniRuntimeContainerDellDemo",
 			"image": "registry.cloudflare.com/53a10bdb35f546522193c9670ad3e7e5/mr:nayan",
 			"max_instances": 2,
             "instance_type": "standard",
-			"name": "mini-runtime-containers-ironheart-demo"
+			"name": "mini-runtime-containers-dell-demo"
 		}
 	],
 	"durable_objects": {
 		"bindings": [
 			{
-				"class_name": "MiniRuntimeContainerIronheartDemo",
-				"name": "MINI_RUNTIME_CONTAINER_IRONHEART_DEMO"
+				"class_name": "MiniRuntimeContainerDellDemo",
+				"name": "MINI_RUNTIME_CONTAINER_DELL_DEMO"
 			}
 		]
 	},
 	"queues": {
 		"consumers": [
 		{
-			"queue": "akto-traffic-queue-ironheart-demo",
+			"queue": "akto-traffic-queue-dell-demo",
 			"max_batch_size": 5,
 			"max_batch_timeout": 30,
 			"max_retries": 3,
@@ -43,7 +43,7 @@
 	"migrations": [
 		{
 			"new_sqlite_classes": [
-				"MiniRuntimeContainerIronheartDemo"
+				"MiniRuntimeContainerDellDemo"
 			],
 			"tag": "v1"
 		}
