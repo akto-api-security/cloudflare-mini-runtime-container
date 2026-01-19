@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "mini-runtime-worker",
+	"name": "mini-runtime-worker-ironheart-demo",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-05-23",
 	"compatibility_flags": [
@@ -15,25 +15,25 @@
 	},
 	"containers": [
 		{
-			"class_name": "MiniRuntimeContainer",
+			"class_name": "MiniRuntimeContainerIronheartDemo",
 			"image": "registry.cloudflare.com/53a10bdb35f546522193c9670ad3e7e5/mr:nayan",
 			"max_instances": 2,
             "instance_type": "standard",
-			"name": "mini-runtime-containers"
+			"name": "mini-runtime-containers-ironheart-demo"
 		}
 	],
 	"durable_objects": {
 		"bindings": [
 			{
-				"class_name": "MiniRuntimeContainer",
-				"name": "MINI_RUNTIME_CONTAINER"
+				"class_name": "MiniRuntimeContainerIronheartDemo",
+				"name": "MINI_RUNTIME_CONTAINER_IRONHEART_DEMO"
 			}
 		]
 	},
 	"queues": {
 		"consumers": [
 		{
-			"queue": "akto-traffic-queue",
+			"queue": "akto-traffic-queue-ironheart-demo",
 			"max_batch_size": 5,
 			"max_batch_timeout": 30,
 			"max_retries": 3,
@@ -43,7 +43,7 @@
 	"migrations": [
 		{
 			"new_sqlite_classes": [
-				"MiniRuntimeContainer"
+				"MiniRuntimeContainerIronheartDemo"
 			],
 			"tag": "v1"
 		}
